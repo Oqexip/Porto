@@ -1,0 +1,18 @@
+▲ Next.js 16.2.10 (Turbopack)
+- Local:         http://localhost:3000
+- Network:       http://192.168.18.14:3000
+✓ Ready in 1265ms
+
+ GET / 200 in 3.1s (next.js: 2.8s, application-code: 327ms)
+ GET /projects 200 in 513ms (next.js: 356ms, application-code: 157ms)
+ GET /certificates 200 in 436ms (next.js: 366ms, application-code: 70ms)
+ GET /contact 200 in 529ms (next.js: 410ms, application-code: 119ms)
+ GET / 200 in 102ms (next.js: 8ms, application-code: 93ms)
+ GET / 200 in 64ms (next.js: 3ms, application-code: 61ms)
+ GET / 200 in 45ms (next.js: 4ms, application-code: 41ms)
+ GET / 200 in 66ms (next.js: 4ms, application-code: 62ms)
+ GET / 200 in 16ms (next.js: 4ms, application-code: 12ms)
+ GET / 200 in 27ms (next.js: 3ms, application-code: 23ms)
+ GET /projects 200 in 36ms (next.js: 4ms, application-code: 33ms)
+ GET /certificates 200 in 26ms (next.js: 3ms, application-code: 24ms)
+ GET /contact 200 in 28ms (next.js: 4ms, application-code: 25ms)
