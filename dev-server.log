@@ -16,3 +16,8 @@
  GET /projects 200 in 36ms (next.js: 4ms, application-code: 33ms)
  GET /certificates 200 in 26ms (next.js: 3ms, application-code: 24ms)
  GET /contact 200 in 28ms (next.js: 4ms, application-code: 25ms)
+ GET / 200 in 52ms (next.js: 5ms, application-code: 47ms)
+ GET /projects 200 in 27ms (next.js: 3ms, application-code: 24ms)
+ GET / 200 in 15ms (next.js: 2ms, application-code: 13ms)
+ GET /certificates 200 in 33ms (next.js: 13ms, application-code: 20ms)
+ GET / 200 in 15ms (next.js: 2ms, application-code: 12ms)
