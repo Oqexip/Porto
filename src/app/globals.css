@@ -1936,8 +1936,8 @@ a {
 
 .cursor-trail i {
     position: absolute;
-    width: 15px;
-    height: 15px;
+    width: 10px;
+    height: 10px;
     border: 2px solid #111;
     box-shadow: 2px 2px 0 #111;
     transform: translate(-50%, -50%) rotate(14deg);

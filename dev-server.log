@@ -154,3 +154,6 @@
  GET /projects 200 in 44ms (next.js: 15ms, application-code: 29ms)
  GET / 200 in 10ms (next.js: 3ms, application-code: 7ms)
  GET / 200 in 14ms (next.js: 2ms, application-code: 12ms)
+✓ Compiled in 90ms
+ GET / 200 in 134ms (next.js: 62ms, application-code: 72ms)
+✓ Compiled in 85ms
