@@ -4,7 +4,7 @@ import { AtSign, Camera, Code2, Mail, MapPin, Phone, Send } from "lucide-react";
 import Header from "@/components/Header";
 import { FormEvent, useState } from "react";
 
-const contacts = [[Mail,"EMAIL","mkdmvx9@gmail.com"],[Phone,"PHONE","+62 851-7744-8544"],[MapPin,"LOCATION","East Java, Indonesia"]] as const;
+const contacts = [[Mail,"EMAIL","ilhamkumbang07@gmail.com"],[Phone,"PHONE","+62 850-5479-5585"],[MapPin,"LOCATION","Jakarta Metropolitan Area, Indonesia"]] as const;
 
 export default function ContactPage() {
   const [sent, setSent] = useState(false);

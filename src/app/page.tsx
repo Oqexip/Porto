@@ -32,7 +32,7 @@ export default function Home() {
       <div className="poster-stats"><div className="poster-stats-title">≡ SERVER_STATS.JSON</div><div><span>Processor</span><b>Intel Core i3-1115G4</b></div><div><span>Memory</span><b>12 GB RAM</b></div><div><span>Status</span><b className="optimal">OPTIMAL</b></div></div>
     </aside>
     <section className="poster-main">
-      <div className="poster-title"><h1>MAKDUM</h1><h2>IBROHIM</h2></div>
+      <div className="poster-title"><h1>Ilham</h1><h2>Sikumbang</h2></div>
       <div className="poster-badges"><span>FREELANCER ♚</span><span>FULLSTACK ▱</span><span>MOBILE DEV ▯</span></div>
       <section className="poster-player">
         <div className="poster-filter"><label htmlFor="playlist">PLAYLIST FILTER:</label><select id="playlist" defaultValue="all"><option value="all">ALL</option><option>Kessoku Band</option></select></div>
@@ -41,7 +41,7 @@ export default function Home() {
         {playing && <iframe className="spotify-audio" title="Karakara by Kessoku Band" src="https://open.spotify.com/embed/track/2ADOoCVouvRdKBzIVkYf3H?utm_source=generator&theme=0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" />}
       </section>
       <div className="poster-divider" />
-      <section className="poster-terminal"><div className="poster-terminal-head"><span><Terminal size={16}/> root@makdum-server:~</span><span className="window-dots"><i/><i/><i/></span></div><div className="poster-terminal-body"><p className="poster-command">$ ./makdum --info</p><p>Hai! Aku web developer yang excited banget bikin website atau aplikasi yang kece dan bisa dipake. Fokus utamaku di frontend, tapi lagi gaspol juga belajar backend. Selalu open buat tantangan baru biar makin jago!</p><p className="poster-arsenal">TECH ARSENAL:</p><div className="poster-tech">{skills.map(skill => <span key={skill}>{skill}</span>)}</div><p className="poster-prompt">root@makdum-server:~# <i /></p></div></section>
+      <section className="poster-terminal"><div className="poster-terminal-head"><span><Terminal size={16}/> root@ilham-server:~</span><span className="window-dots"><i/><i/><i/></span></div><div className="poster-terminal-body"><p className="poster-command">$ ./ilham --info</p><p>Hai! Aku web developer yang excited banget bikin website atau aplikasi yang kece dan bisa dipake. Fokus utamaku di frontend, tapi lagi gaspol juga belajar backend. Selalu open buat tantangan baru biar makin jago!</p><p className="poster-arsenal">TECH ARSENAL:</p><div className="poster-tech">{skills.map(skill => <span key={skill}>{skill}</span>)}</div><p className="poster-prompt">root@ilham-server:~# <i /></p></div></section>
     </section>
   </section></main></>;
 }
