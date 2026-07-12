@@ -31,17 +31,21 @@ export default function CursorTrail() {
       // Throttle
       if (event.timeStamp - last.current < 28) return;
 
+      const scaleFactor = 0.9;
+      const pageX = event.pageX / scaleFactor;
+      const pageY = event.pageY / scaleFactor;
+
       // Simpan posisi pertama
       if (!lastPosition.current) {
         lastPosition.current = {
-          x: event.clientX,
-          y: event.clientY,
+          x: pageX,
+          y: pageY,
         };
         return;
       }
 
-      const dx = event.clientX - lastPosition.current.x;
-      const dy = event.clientY - lastPosition.current.y;
+      const dx = pageX - lastPosition.current.x;
+      const dy = pageY - lastPosition.current.y;
 
       // Cursor belum bergerak cukup jauh
       if (dx * dx + dy * dy < MIN_DISTANCE_SQ) return;
@@ -49,16 +53,16 @@ export default function CursorTrail() {
       last.current = event.timeStamp;
 
       lastPosition.current = {
-        x: event.clientX,
-        y: event.clientY,
+        x: pageX,
+        y: pageY,
       };
 
       const dotId = id.current++;
 
       const dot: Dot = {
         id: dotId,
-        x: event.clientX,
-        y: event.clientY,
+        x: pageX,
+        y: pageY,
         color: colors[dotId % colors.length],
       };
 
