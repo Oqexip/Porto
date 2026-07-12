@@ -24,7 +24,6 @@ export default function Home() {
       <div className="poster-sticker">NO BUGS, ONLY FEATURES</div>
       <div className="poster-photo-frame">
         <div className="profile-photo" aria-label="Your profile photo area"><span className="profile-code">&lt;/&gt;</span><div className="portrait-head" /><div className="portrait-body" /></div>
-        <span className="poster-photo-label">PHOTO</span>
       </div>
       <div className="poster-role">MOBILE DEVELOPER</div>
       <div className="poster-loading"><strong>LOADING...</strong><span>[{blocks}] &nbsp;{loading}%</span></div>
