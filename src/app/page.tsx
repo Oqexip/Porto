@@ -16,7 +16,24 @@ import CursorTrail from "@/components/CursorTrail";
 import Image from "next/image";
 import { useEffect, useState, useRef } from "react";
 
-const skills = ["Laravel", "React", "Next.js", "Tailwind", "Docker", "Linux"];
+const skills = [
+  "JS",
+  "Python",
+  "TS",
+  "HTML",
+  "CSS",
+  "React",
+  "Next.js",
+  "Node.js",
+  "PHP",
+  "Laravel",
+  "MySQL",
+  "Postgres",
+  "Git",
+  "GitHub",
+  "Docker",
+  "IOT",
+];
 
 interface Song {
   title: string;
@@ -76,14 +93,62 @@ export default function Home() {
   const [muted, setMuted] = useState(false);
   const [loop, setLoop] = useState(false);
 
+  const [totalContributions, setTotalContributions] = useState<string>("LOADING...");
+  const [daysInGame, setDaysInGame] = useState<string>("LOADING...");
+
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => {
     const id = window.setInterval(
       () => setLoading((value) => (value >= 100 ? 0 : value + 1)),
-      45,
+      80,
     );
     return () => window.clearInterval(id);
+  }, []);
+
+  useEffect(() => {
+    // Fetch GitHub User Info for DAYS_IN_GAME (username: Oqexip)
+    fetch("https://api.github.com/users/Oqexip")
+      .then((res) => {
+        if (!res.ok) throw new Error("Failed to fetch user data");
+        return res.json();
+      })
+      .then((data) => {
+        if (data.created_at) {
+          const created = new Date(data.created_at);
+          const diffTime = Math.abs(new Date().getTime() - created.getTime());
+          const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+          setDaysInGame(`${diffDays} DAYS`);
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+        // Fallback calculation based on a solid registration date estimate
+        const created = new Date("2023-11-20");
+        const diffTime = Math.abs(new Date().getTime() - created.getTime());
+        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+        setDaysInGame(`${diffDays} DAYS`);
+      });
+
+    // Fetch GitHub Contributions for TOTAL_CONTRIBUTION
+    fetch("https://github-contributions-api.jogruber.de/v4/Oqexip")
+      .then((res) => {
+        if (!res.ok) throw new Error("Failed to fetch contributions");
+        return res.json();
+      })
+      .then((data) => {
+        if (data && data.total) {
+          const total = Object.values(data.total).reduce(
+            (acc: number, val: any) => acc + (Number(val) || 0),
+            0,
+          );
+          setTotalContributions(`${total} PTS`);
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+        setTotalContributions("327 PTS");
+      });
   }, []);
 
   // Sync play state
@@ -172,18 +237,18 @@ export default function Home() {
             </div>
             <div className="poster-connector" />
             <div className="poster-stats">
-              <div className="poster-stats-title">≡ SERVER_STATS.JSON</div>
+              <div className="poster-stats-title">≡ STATS.JSON</div>
               <div>
-                <span>Processor</span>
-                <b>Intel Core i3-1115G4</b>
+                <span>TOTAL_CONTRIBUTION</span>
+                <b>{totalContributions}</b>
               </div>
               <div>
-                <span>Memory</span>
-                <b>12 GB RAM</b>
+                <span>DAYS_IN_GAME</span>
+                <b>{daysInGame}</b>
               </div>
               <div>
                 <span>Status</span>
-                <b className="optimal">OPTIMAL</b>
+                <b className="optimal">ALIVE</b>
               </div>
             </div>
           </aside>
@@ -193,10 +258,10 @@ export default function Home() {
               <h2>Sikumbang</h2>
             </div>
             <div className="poster-badges">
-              <span>CODER ♚</span>
-              <span>FULLSTACK ▱</span>
+              <span>CODER</span>
+              <span>FULLSTACK</span>
               <span>WEEB</span>
-              <span>AI/ML ▰</span>
+              <span>AI/ML</span>
             </div>
             <section className="poster-player">
               <audio
@@ -302,7 +367,7 @@ export default function Home() {
                   <button
                     aria-label="Repeat"
                     onClick={() => setLoop(!loop)}
-                    style={{ color: loop ? "var(--pink)" : "inherit" }}
+                    style={loop ? { color: "var(--pink)" } : undefined}
                   >
                     <Repeat2 size={18} />
                   </button>
@@ -335,9 +400,9 @@ export default function Home() {
               <div className="poster-terminal-body">
                 <p className="poster-command">$ ./ilham --info</p>
                 <p>
-                  Hai! Aku web developer yang excited banget bikin website atau
-                  aplikasi yang kece dan bisa dipake. Fokus utamaku di frontend,
-                  tapi lagi gaspol juga belajar backend. Selalu open buat
+                  Hai! Aku developer yang excited banget bikin website atau
+                  ngotak-ngatik elektronik. Fokus utamaku di hardware,
+                  tapi lagi gaspol juga buat belajar AI/ML. Selalu open buat
                   tantangan baru biar makin jago!
                 </p>
                 <p className="poster-arsenal">TECH ARSENAL:</p>
