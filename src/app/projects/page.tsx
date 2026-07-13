@@ -3,9 +3,9 @@ import Header from "@/components/Header";
 
 const projects = [
   {
-    title: "Web Desa Murtajih",
-    text: "Portal informasi desa yang cepat, rapi, dan mudah digunakan warga.",
-    stack: ["React", "Tailwind CSS", "Vercel"],
+    title: "OmongIn",
+    text: "Sosil media anonim.",
+    stack: ["Laravel", "Tailwind CSS", "Vercel"],
     color: "pink",
   },
   {
@@ -15,7 +15,7 @@ const projects = [
     color: "yellow",
   },
   {
-    title: "Chatbot App",
+    title: "River",
     text: "Eksperimen mobile chatbot dengan antarmuka yang ringan dan responsif.",
     stack: ["React Native", "Expo", "Mobile"],
     color: "green",

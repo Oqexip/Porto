@@ -6,7 +6,7 @@ import { FormEvent, useState } from "react";
 
 const contacts = [
   [Mail, "EMAIL", "ilhamkumbang07@gmail.com"],
-  [Phone, "PHONE", "+62 850-5479-5585"],
+  [Phone, "PHONE", "+62 859-5479-5585"],
   [MapPin, "LOCATION", "Jakarta Metropolitan Area, Indonesia"],
 ] as const;
 

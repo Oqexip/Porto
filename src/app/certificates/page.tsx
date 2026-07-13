@@ -2,12 +2,12 @@ import { Award } from "lucide-react";
 import Header from "@/components/Header";
 
 const certificates = [
-  {
-    name: "Dicoding Indonesia",
-    mark: "DI",
-    count: "6 CREDENTIALS",
-    text: "Learning paths and certified courses across web and cloud development.",
-  },
+  // {
+  //   name: "Dicoding Indonesia",
+  //   mark: "DI",
+  //   count: "6 CREDENTIALS",
+  //   text: "Learning paths and certified courses across web and cloud development.",
+  // },
   {
     name: "IMPHNEN",
     mark: "IM",
