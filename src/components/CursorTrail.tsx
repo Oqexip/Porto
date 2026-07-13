@@ -9,13 +9,7 @@ type Dot = {
   color: string;
 };
 
-const colors = [
-  "#f8e71c",
-  "#50e3c2",
-  "#4a90e2",
-  "#ff79c6",
-  "#ff554d",
-];
+const colors = ["#f8e71c", "#50e3c2", "#4a90e2", "#ff79c6", "#ff554d"];
 
 const MIN_DISTANCE = 15;
 const MIN_DISTANCE_SQ = MIN_DISTANCE * MIN_DISTANCE;

@@ -6,13 +6,68 @@ import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
-const links = [["★ PROFILE ★", "/"], ["PROJECTS", "/projects"], ["CERTIFICATES", "/certificates"], ["CONTACT", "/contact"]] as const;
+const links = [
+  ["★ PROFILE ★", "/"],
+  ["PROJECTS", "/projects"],
+  ["CERTIFICATES", "/certificates"],
+  ["CONTACT", "/contact"],
+] as const;
 
 export default function Header({ back = false }: { back?: boolean }) {
-  const [open, setOpen] = useState(false); const [mounted, setMounted] = useState(false); const { theme, setTheme } = useTheme(); const router = useRouter();
+  const [open, setOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
+  const { theme, setTheme } = useTheme();
+  const router = useRouter();
   useEffect(() => setMounted(true), []);
-  return <header className="site-header"><div className="header-inner">
-    {back ? <Link href="/" className="back-link">← BACK TO HOME</Link> : <nav className="desktop-nav">{links.map(([label, href]) => <Link key={href} href={href}>{label}</Link>)}</nav>}
-    <div className="header-actions"><button className="theme-toggle" onClick={() => setTheme(theme === "dark" ? "light" : "dark")} aria-label="Toggle theme">{mounted && theme === "dark" ? <Sun size={21} /> : <Moon size={21} />}</button><button className="dont-click" onClick={() => router.push("/secret")}>☠ <span>DON&apos;T CLICK ME</span></button><button className="mobile-toggle" onClick={() => setOpen(!open)} aria-label="Toggle menu">{open ? <X /> : <Menu />}</button></div>
-  </div>{open && <nav className="mobile-menu">{links.map(([label, href]) => <Link key={href} href={href} onClick={() => setOpen(false)}>{label}</Link>)}</nav>}</header>;
+  return (
+    <header className="site-header">
+      <div className="header-inner">
+        {back ? (
+          <Link href="/" className="back-link">
+            ← BACK TO HOME
+          </Link>
+        ) : (
+          <nav className="desktop-nav">
+            {links.map(([label, href]) => (
+              <Link key={href} href={href}>
+                {label}
+              </Link>
+            ))}
+          </nav>
+        )}
+        <div className="header-actions">
+          <button
+            className="theme-toggle"
+            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+            aria-label="Toggle theme"
+          >
+            {mounted && theme === "dark" ? (
+              <Sun size={21} />
+            ) : (
+              <Moon size={21} />
+            )}
+          </button>
+          <button className="dont-click" onClick={() => router.push("/secret")}>
+            ☠ <span>DON&apos;T CLICK ME</span>
+          </button>
+          <button
+            className="mobile-toggle"
+            onClick={() => setOpen(!open)}
+            aria-label="Toggle menu"
+          >
+            {open ? <X /> : <Menu />}
+          </button>
+        </div>
+      </div>
+      {open && (
+        <nav className="mobile-menu">
+          {links.map(([label, href]) => (
+            <Link key={href} href={href} onClick={() => setOpen(false)}>
+              {label}
+            </Link>
+          ))}
+        </nav>
+      )}
+    </header>
+  );
 }
