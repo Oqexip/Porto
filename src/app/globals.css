@@ -83,8 +83,7 @@ a {
 }
 
 .brand,
-.desktop-nav a,
-.back-link {
+.desktop-nav a {
   font-family: var(--font-geist-mono);
   font-size: 13px;
   font-weight: 900;
@@ -144,6 +143,29 @@ a {
 .dark .dont-click {
   border-color: var(--line) !important;
   box-shadow: 4px 4px 0 var(--line) !important;
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 3px solid var(--line);
+  padding: 12px 20px;
+  background: var(--blue);
+  color: #fff;
+  font-family: var(--font-pixel);
+  font-size: 12px;
+  font-weight: 400;
+  box-shadow: 4px 4px 0 var(--line);
+  transition: 0.15s;
+  text-decoration: none;
+}
+
+.back-link:hover {
+  transform: translate(3px, 3px);
+  box-shadow: 1px 1px 0 var(--line);
+  border-color: var(--line);
+  color: #fff;
 }
 
 .dont-click:hover,
