@@ -259,9 +259,9 @@ export default function Home() {
             </div>
             <div className="poster-badges">
               <span>CODER</span>
-              <span>FULLSTACK</span>
               <span>WEEB</span>
-              <span>AI/ML</span>
+              <span>LARPER</span>
+              <span>WANNABE ENGINEER</span>
             </div>
             <section className="poster-player">
               <audio
