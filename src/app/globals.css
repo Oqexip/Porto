@@ -1781,3 +1781,255 @@ a {
 }
 
 
+/* Warning Stripes */
+.warning-stripes {
+  height: 24px;
+  background: repeating-linear-gradient(
+    -45deg,
+    var(--yellow),
+    var(--yellow) 15px,
+    var(--line) 15px,
+    var(--line) 30px
+  );
+  border: 3px solid var(--line);
+  box-shadow: 4px 4px 0 var(--line);
+  margin-bottom: 36px;
+}
+
+/* Dev Phase Page Styles */
+.dev-layout {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 32px;
+  margin-top: 40px;
+}
+
+.dev-main-card {
+  border: 3px solid var(--line);
+  box-shadow: 7px 7px 0 var(--line);
+  background: var(--paper);
+}
+
+.dev-card-header {
+  padding: 14px 18px;
+  background: var(--pink);
+  color: #111;
+  border-bottom: 3px solid var(--line);
+  font: 900 15px var(--font-geist-mono);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.dev-card-body {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.dev-card-body h2 {
+  margin: 0;
+  font-family: var(--font-geist-mono);
+  font-size: 20px;
+  font-weight: 900;
+}
+
+.dev-progress-container {
+  height: 36px;
+  border: 3px solid var(--line);
+  background: var(--bg);
+  overflow: hidden;
+  position: relative;
+}
+
+.dev-progress-bar {
+  height: 100%;
+  background: var(--green);
+  transition: width 0.4s ease;
+  display: flex;
+  align-items: center;
+  padding-left: 12px;
+  border-right: 3px solid var(--line);
+}
+
+.dev-progress-bar span {
+  font: 900 14px var(--font-geist-mono);
+  color: #111;
+}
+
+.dev-status-text {
+  font-size: 14px;
+  color: var(--muted);
+  font-weight: 600;
+  margin: 0;
+}
+
+.dev-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.yellow-btn {
+  background: var(--yellow) !important;
+}
+
+.dev-terminal-card {
+  border: 3px solid var(--line);
+  box-shadow: 7px 7px 0 var(--line);
+  background: #111;
+  color: #f7f7ef;
+  display: flex;
+  flex-direction: column;
+  height: 380px;
+  overflow: hidden;
+}
+
+.dev-terminal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  border-bottom: 3px solid var(--line);
+  background: var(--blue);
+  color: #fff;
+  font: 900 14px var(--font-geist-mono);
+}
+
+.dev-terminal-header .window-dots {
+  flex-direction: row-reverse;
+}
+
+.dev-terminal-header .window-dots i {
+  width: 14px;
+  height: 14px;
+  border: 2px solid var(--line);
+}
+
+.dev-terminal-body {
+  padding: 16px;
+  font: 13px/1.5 var(--font-geist-mono);
+  overflow-y: auto;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.dev-terminal-body p {
+  margin: 0 0 8px;
+}
+
+.log-ok {
+  color: var(--green);
+}
+
+.log-warn {
+  color: var(--yellow);
+}
+
+.log-err {
+  color: var(--red);
+}
+
+.log-prompt {
+  color: #fff;
+  margin-top: auto !important;
+}
+
+.anim-bob {
+  animation: bob 1s ease-in-out infinite alternate;
+}
+
+@keyframes bob {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-4px);
+  }
+}
+
+/* 404 Page Customizations */
+.err-path {
+  color: var(--pink);
+  font-weight: 900;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+}
+
+.err-desc {
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.excuse-box {
+  margin: 24px 0;
+  padding: 16px;
+  border: 2px dashed var(--yellow);
+  background: rgba(248, 231, 28, 0.05);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.excuse-label {
+  font: 900 11px var(--font-geist-mono);
+  color: var(--yellow);
+}
+
+.excuse-box p {
+  margin: 0;
+  font-style: italic;
+  font-size: 14px;
+}
+
+.excuse-btn {
+  align-self: flex-start;
+  background: transparent;
+  border: 1px solid var(--yellow);
+  color: var(--yellow);
+  padding: 4px 8px;
+  font: 900 10px var(--font-geist-mono);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s;
+}
+
+.excuse-btn:hover {
+  background: var(--yellow);
+  color: #111;
+}
+
+.back-link-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 3px solid var(--line);
+  padding: 12px 20px;
+  background: var(--blue);
+  color: #fff;
+  font-family: var(--font-pixel);
+  font-size: 11px;
+  font-weight: 400;
+  box-shadow: 4px 4px 0 var(--line);
+  transition: 0.15s;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.back-link-btn:hover {
+  transform: translate(3px, 3px);
+  box-shadow: 1px 1px 0 var(--line);
+  color: #fff;
+}
+
+@media (max-width: 850px) {
+  .dev-layout {
+    grid-template-columns: 1fr;
+  }
+}
