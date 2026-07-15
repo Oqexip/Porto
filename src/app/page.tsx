@@ -258,9 +258,9 @@ export default function Home() {
               <h2>Sikumbang</h2>
             </div>
             <div className="poster-badges">
-              <span>CODER</span>
               <span>WEEB</span>
               <span>LARPER</span>
+              <span>CODER</span>
               <span>WANNABE ENGINEER</span>
             </div>
             <section className="poster-player">
