@@ -39,3 +39,17 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# dev server logs
+dev-server.log
+dev-server-error.log
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+Thumbs.db
+
+# Gemini/AI
+.agents/
