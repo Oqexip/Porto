@@ -47,7 +47,7 @@ export default function Header({ back = false }: { back?: boolean }) {
               <Moon size={21} />
             )}
           </button>
-          <button className="dont-click" onClick={() => router.push("/secret")}>
+          <button className="dont-click" onClick={() => router.push("/development")}>
             ☠ <span>DON&apos;T CLICK ME</span>
           </button>
           <button
