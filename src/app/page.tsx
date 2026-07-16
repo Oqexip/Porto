@@ -32,7 +32,7 @@ const skills = [
   "Git",
   "GitHub",
   "Docker",
-  "IOT",
+  "Tinkercad",
 ];
 
 interface Song {
