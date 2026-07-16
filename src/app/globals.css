@@ -589,12 +589,17 @@ a {
 }
 
 .error-page {
-  min-height: 100vh;
+  min-height: 111.2vh;
   display: grid;
   place-items: center;
   padding: 24px;
   background: var(--red);
   color: #111;
+}
+
+html.error-html-bg,
+body.error-body-bg {
+  background: var(--red) !important;
 }
 
 .error-card {

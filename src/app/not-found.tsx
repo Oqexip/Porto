@@ -21,6 +21,12 @@ export default function NotFound() {
     if (typeof window !== "undefined") {
       setPath(window.location.pathname);
     }
+    document.documentElement.classList.add("error-html-bg");
+    document.body.classList.add("error-body-bg");
+    return () => {
+      document.documentElement.classList.remove("error-html-bg");
+      document.body.classList.remove("error-body-bg");
+    };
   }, []);
 
   const randomizeExcuse = () => {
