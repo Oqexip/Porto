@@ -7,24 +7,28 @@ const projects = [
     text: "Sosil media anonim.",
     stack: ["Laravel", "Tailwind CSS", "Vercel"],
     color: "pink",
+    github: "https://github.com/Oqexip/OmongIn.git",
   },
   {
     title: "EasyPDF App",
     text: "Toolkit PDF praktis untuk perangkat mobile, dibuat agar urusan dokumen tidak ribet.",
     stack: ["Flutter", "Dart", "Mobile"],
     color: "yellow",
+    github: "https://github.com/Oqexip",
   },
   {
     title: "River",
     text: "Eksperimen mobile chatbot dengan antarmuka yang ringan dan responsif.",
     stack: ["React Native", "Expo", "Mobile"],
     color: "green",
+    github: "https://github.com/Oqexip",
   },
   {
     title: "Day Counter App",
     text: "Aplikasi kecil untuk menghitung hari penting dengan pengalaman yang menyenangkan.",
     stack: ["React", "Tailwind CSS", "Web"],
     color: "blue",
+    github: "https://github.com/Oqexip",
   },
 ];
 
@@ -69,7 +73,7 @@ export default function ProjectsPage() {
                   ))}
                 </div>
                 <div className="project-links">
-                  <a href="https://github.com" target="_blank" rel="noreferrer">
+                  <a href={project.github} target="_blank" rel="noreferrer">
                     <Code2 size={15} /> SOURCE
                   </a>
                   <a href="#" aria-label={`View ${project.title}`}>
