@@ -20,36 +20,6 @@ const LOG_LINES: LogLine[] = [
   { prefix: "admin@system:~#", text: "" },
 ];
 
-const playTypewriterSound = () => {
-  if (typeof window === "undefined") return;
-  try {
-    const audioCtx = new (window.AudioContext || (window as any).webkitAudioContext)();
-    const osc = audioCtx.createOscillator();
-    const gain = audioCtx.createGain();
-    
-    osc.connect(gain);
-    gain.connect(audioCtx.destination);
-    
-    // Square wave gives it a classic 8-bit retro computer/terminal vibe
-    osc.type = "square";
-    
-    const now = audioCtx.currentTime;
-    // Rapid pitch sweep downwards creates a crisp retro terminal clack/blip
-    const startFreq = 800 + Math.random() * 300;
-    osc.frequency.setValueAtTime(startFreq, now);
-    osc.frequency.exponentialRampToValueAtTime(100, now + 0.03);
-    
-    // Increased volume (0.18) for a punchy, louder sound
-    gain.gain.setValueAtTime(0.18, now);
-    gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.03);
-    
-    osc.start(now);
-    osc.stop(now + 0.03);
-  } catch (e) {
-    // Ignore autoplay policy blocks
-  }
-};
-
 export default function SecretPage() {
   const [squashed, setSquashed] = useState(0);
   const [bugs, setBugs] = useState(
@@ -74,9 +44,6 @@ export default function SecretPage() {
       const timeout = setTimeout(() => {
         const nextChar = currentLine.text[currentText.length];
         setCurrentText((prev) => prev + nextChar);
-        if (nextChar !== " ") {
-          playTypewriterSound();
-        }
       }, 50); // Slowed down from 30ms to 75ms per character
       return () => clearTimeout(timeout);
     } else {
