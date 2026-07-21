@@ -29,16 +29,17 @@ export default function CertificatesPage() {
       <main className="page-shell sub-page page-enter">
         <section className="page-heading">
           <h1 className="pixel-heading">
-            <Award className="pixel-heading-icon-teal" size={68} strokeWidth={2.5} />
+            <Award
+              className="pixel-heading-icon-teal"
+              size={68}
+              strokeWidth={2.5}
+            />
             <span className="pixel-heading-my">PROOF OF</span>
             <span className="pixel-heading-box-teal">SKILL</span>
           </h1>
-          <p>
-            <code>
-              SELECT * FROM credentials WHERE effort = &apos;consistent&apos;
-              AND curiosity = &apos;high&apos;;
-            </code>
-          </p>
+          <div className="query-box-retro">
+            <div>&gt; SELECT * FROM credentials WHERE effort = 'consistent' AND curiosity = 'high';</div>
+          </div>
         </section>
         <section className="certificate-grid">
           {certificates.map((cert) => (
