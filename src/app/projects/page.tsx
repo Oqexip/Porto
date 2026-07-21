@@ -38,9 +38,10 @@ export default function ProjectsPage() {
       <Header back />
       <main className="page-shell sub-page page-enter">
         <section className="page-heading">
-          <h1>
-            <FolderGit2 size={50} strokeWidth={2.5} />
-            MY PROJECTS
+          <h1 className="pixel-heading">
+            <FolderGit2 className="pixel-heading-icon" size={68} strokeWidth={2.5} />
+            <span className="pixel-heading-my">MY</span>
+            <span className="pixel-heading-box">PROJECTS</span>
           </h1>
           <p>
             A small collection of things I&apos;ve built, shipped, explored, and
