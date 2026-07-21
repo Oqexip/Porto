@@ -28,9 +28,10 @@ export default function CertificatesPage() {
       <Header back />
       <main className="page-shell sub-page page-enter">
         <section className="page-heading">
-          <h1>
-            <Award size={51} strokeWidth={2.5} />
-            PROOF OF SKILL
+          <h1 className="pixel-heading">
+            <Award className="pixel-heading-icon-teal" size={68} strokeWidth={2.5} />
+            <span className="pixel-heading-my">PROOF OF</span>
+            <span className="pixel-heading-box-teal">SKILL</span>
           </h1>
           <p>
             <code>
