@@ -10,11 +10,12 @@ const projects = [
     github: "https://github.com/Oqexip/OmongIn.git",
   },
   {
-    title: "EasyPDF App",
-    text: "Toolkit PDF praktis untuk perangkat mobile, dibuat agar urusan dokumen tidak ribet.",
-    stack: ["Flutter", "Dart", "Mobile"],
+    title: "EasyVert",
+    text: "Konverter file tipe apapun menjadi apapun. 100% berjalan di sisi klien.",
+    stack: ["Vite", "React", "Web"],
     color: "yellow",
-    github: "https://github.com/Oqexip",
+    github: "https://github.com/Oqexip/EasyVert.git",
+    preview: "https://easyvert.vercel.app/",
   },
   {
     title: "River",
@@ -77,7 +78,12 @@ export default function ProjectsPage() {
                   <a href={project.github} target="_blank" rel="noreferrer">
                     <Code2 size={15} /> SOURCE
                   </a>
-                  <a href="#" aria-label={`View ${project.title}`}>
+                  <a
+                    href={project.preview || "#"}
+                    target={project.preview ? "_blank" : undefined}
+                    rel={project.preview ? "noreferrer" : undefined}
+                    aria-label={`View ${project.title}`}
+                  >
                     <ExternalLink size={15} /> LIVE PREVIEW
                   </a>
                 </div>
