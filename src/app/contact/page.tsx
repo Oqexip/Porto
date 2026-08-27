@@ -1,6 +1,6 @@
 "use client";
 
-import { AtSign, Camera, Code2, Mail, MapPin, Phone, Send } from "lucide-react";
+import { AtSign, Camera, Code2, Loader2, Mail, MapPin, Phone, Send } from "lucide-react";
 import Header from "@/components/Header";
 import { FormEvent, useState } from "react";
 
@@ -11,11 +11,56 @@ const contacts = [
 ] as const;
 
 export default function ContactPage() {
-  const [sent, setSent] = useState(false);
-  function submit(e: FormEvent) {
+  const [loading, setLoading] = useState(false);
+  const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
+  const [errorMessage, setErrorMessage] = useState("");
+
+  async function submit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    setSent(true);
+    setLoading(true);
+    setStatus("idle");
+    setErrorMessage("");
+
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+    const name = formData.get("name")?.toString() || "";
+    const email = formData.get("email")?.toString() || "";
+    const message = formData.get("message")?.toString() || "";
+
+    try {
+      const response = await fetch("https://formsubmit.co/ajax/ilhamkumbang07@gmail.com", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          name,
+          email,
+          message,
+          _subject: `Pesan Baru Portfolio dari ${name}`,
+          _template: "table",
+          _captcha: "false",
+        }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok || data.success === "true" || data.success === true) {
+        setStatus("success");
+        form.reset();
+      } else {
+        setStatus("error");
+        setErrorMessage(data.message || "Gagal mengirim pesan. Silakan coba lagi.");
+      }
+    } catch {
+      setStatus("error");
+      setErrorMessage("Terjadi kesalahan koneksi. Silakan coba beberapa saat lagi.");
+    } finally {
+      setLoading(false);
+    }
   }
+
   return (
     <>
       <Header back />
@@ -58,7 +103,7 @@ export default function ContactPage() {
             <h2>SEND PAYLOAD</h2>
             <label className="field">
               NAME
-              <input required name="name" placeholder="Your name" />
+              <input required name="name" placeholder="Your name" disabled={loading} />
             </label>
             <label className="field">
               EMAIL
@@ -67,6 +112,7 @@ export default function ContactPage() {
                 type="email"
                 name="email"
                 placeholder="you@example.com"
+                disabled={loading}
               />
             </label>
             <label className="field">
@@ -76,14 +122,37 @@ export default function ContactPage() {
                 name="message"
                 rows={6}
                 placeholder="Write your message here..."
+                disabled={loading}
               />
             </label>
-            <button className="brutal-button" type="submit">
-              <Send size={16} /> KIRIM PESAN
+            <button
+              className="brutal-button"
+              type="submit"
+              disabled={loading}
+              style={{ display: "inline-flex", alignItems: "center", gap: "8px", cursor: loading ? "not-allowed" : "pointer", opacity: loading ? 0.7 : 1 }}
+            >
+              {loading ? (
+                <>
+                  <Loader2 size={16} className="animate-spin" /> MENGIRIM...
+                </>
+              ) : (
+                <>
+                  <Send size={16} /> KIRIM PESAN
+                </>
+              )}
             </button>
-            <p className="form-note" aria-live="polite">
-              {sent && "Payload received! I will get back to you soon."}
-            </p>
+            <div className="form-note" aria-live="polite" style={{ marginTop: "12px" }}>
+              {status === "success" && (
+                <p style={{ color: "#159767", margin: 0, fontWeight: 700 }}>
+                  ✓ Pesan berhasil dikirim ke ilhamkumbang07@gmail.com!
+                </p>
+              )}
+              {status === "error" && (
+                <p style={{ color: "#ef4444", margin: 0, fontWeight: 700 }}>
+                  ✕ {errorMessage}
+                </p>
+              )}
+            </div>
           </form>
         </section>
       </main>
