@@ -109,21 +109,22 @@ export default function Home() {
   useEffect(() => {
     // Fetch GitHub User Info for DAYS_IN_GAME (username: Oqexip)
     fetch("https://api.github.com/users/Oqexip")
-      .then((res) => {
-        if (!res.ok) throw new Error("Failed to fetch user data");
-        return res.json();
-      })
+      .then((res) => (res.ok ? res.json() : null))
       .then((data) => {
-        if (data.created_at) {
+        if (data && data.created_at) {
           const created = new Date(data.created_at);
+          const diffTime = Math.abs(new Date().getTime() - created.getTime());
+          const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+          setDaysInGame(`${diffDays} DAYS`);
+        } else {
+          // Fallback calculation based on registration date
+          const created = new Date("2023-11-20");
           const diffTime = Math.abs(new Date().getTime() - created.getTime());
           const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
           setDaysInGame(`${diffDays} DAYS`);
         }
       })
-      .catch((err) => {
-        console.error(err);
-        // Fallback calculation based on a solid registration date estimate
+      .catch(() => {
         const created = new Date("2023-11-20");
         const diffTime = Math.abs(new Date().getTime() - created.getTime());
         const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
@@ -132,21 +133,19 @@ export default function Home() {
 
     // Fetch GitHub Contributions for TOTAL_CONTRIBUTION
     fetch("https://github-contributions-api.jogruber.de/v4/Oqexip")
-      .then((res) => {
-        if (!res.ok) throw new Error("Failed to fetch contributions");
-        return res.json();
-      })
+      .then((res) => (res.ok ? res.json() : null))
       .then((data) => {
         if (data && data.total) {
           const total = Object.values(data.total).reduce(
-            (acc: number, val: any) => acc + (Number(val) || 0),
+            (acc: number, val: unknown) => acc + (Number(val) || 0),
             0,
           );
           setTotalContributions(`${total} PTS`);
+        } else {
+          setTotalContributions("327 PTS");
         }
       })
-      .catch((err) => {
-        console.error(err);
+      .catch(() => {
         setTotalContributions("327 PTS");
       });
   }, []);
