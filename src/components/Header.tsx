@@ -18,7 +18,9 @@ export default function Header({ back = false }: { back?: boolean }) {
   const [mounted, setMounted] = useState(false);
   const { theme, setTheme } = useTheme();
   const router = useRouter();
+
   useEffect(() => setMounted(true), []);
+
   return (
     <header className="site-header">
       <div className="header-inner">
@@ -55,7 +57,7 @@ export default function Header({ back = false }: { back?: boolean }) {
             onClick={() => setOpen(!open)}
             aria-label="Toggle menu"
           >
-            {open ? <X /> : <Menu />}
+            {open ? <X size={22} strokeWidth={2.5} /> : <Menu size={22} strokeWidth={2.5} />}
           </button>
         </div>
       </div>
@@ -66,6 +68,16 @@ export default function Header({ back = false }: { back?: boolean }) {
               {label}
             </Link>
           ))}
+          <button
+            type="button"
+            className="mobile-menu-btn mobile-dont-click"
+            onClick={() => {
+              setOpen(false);
+              router.push("/development");
+            }}
+          >
+            ☠ DON&apos;T CLICK ME
+          </button>
         </nav>
       )}
     </header>

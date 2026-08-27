@@ -117,8 +117,7 @@ a {
   gap: 8px;
 }
 
-.theme-toggle,
-.mobile-toggle {
+.theme-toggle {
   width: 37px;
   height: 37px;
   display: grid;
@@ -126,6 +125,93 @@ a {
   border: 2px solid var(--line);
   background: var(--paper);
   color: var(--ink);
+}
+
+.mobile-toggle {
+  display: none;
+  width: 37px;
+  height: 37px;
+  place-items: center;
+  border: 2px solid var(--line);
+  background: var(--paper);
+  color: var(--ink);
+  cursor: pointer;
+  box-shadow: 2px 2px 0 var(--line);
+}
+
+.mobile-menu {
+  display: flex !important;
+  flex-direction: column;
+  gap: 10px;
+  padding: 16px 20px 24px;
+  background: var(--bg);
+  border-top: 3px solid var(--line);
+  box-shadow: 0 8px 0 rgba(0, 0, 0, 0.15);
+  animation: mobileMenuSlide 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  z-index: 50;
+  width: 100%;
+}
+
+@keyframes mobileMenuSlide {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.mobile-menu a,
+.mobile-menu .mobile-menu-btn {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 13px 16px;
+  border: 3px solid var(--line);
+  box-shadow: 4px 4px 0 var(--line);
+  font: 400 13px var(--font-pixel);
+  letter-spacing: 0.05em;
+  text-align: center;
+  text-transform: uppercase;
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+  color: #111;
+  text-decoration: none;
+}
+
+.mobile-menu a:nth-child(1) {
+  background: var(--blue);
+  color: #fff;
+}
+
+.mobile-menu a:nth-child(2) {
+  background: var(--yellow);
+  color: #111;
+}
+
+.mobile-menu a:nth-child(3) {
+  background: var(--green);
+  color: #111;
+}
+
+.mobile-menu a:nth-child(4) {
+  background: var(--pink);
+  color: #fff;
+}
+
+.mobile-menu .mobile-dont-click {
+  background: var(--red);
+  color: #fff;
+  cursor: pointer;
+}
+
+.mobile-menu a:active,
+.mobile-menu .mobile-menu-btn:active {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 var(--line);
 }
 
 .dont-click {
