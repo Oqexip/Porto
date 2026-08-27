@@ -57,7 +57,7 @@ export default function Header({ back = false }: { back?: boolean }) {
             onClick={() => setOpen(!open)}
             aria-label="Toggle menu"
           >
-            {open ? <X size={22} strokeWidth={2.5} /> : <Menu size={22} strokeWidth={2.5} />}
+            {open ? <X size={21} strokeWidth={2.5} /> : <Menu size={21} strokeWidth={2.5} />}
           </button>
         </div>
       </div>
