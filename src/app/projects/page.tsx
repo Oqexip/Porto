@@ -42,6 +42,22 @@ const projects: Project[] = [
     preview: "https://easyvert.vercel.app/",
   },
   {
+    title: "Hand Tracking",
+    category: "COMPUTER VISION",
+    text: "Aplikasi filter kamera interaktif menggunakan gesture tangan (hand tracking) dengan MediaPipe dan OpenCV. Anda dapat membuat portal dengan jari Anda yang akan menerapkan berbagai filter menarik (Mono, Dual-Tone, Pixelate, Invert, Sepia, Blur, Thermal, Sketch, Glitch, Neon, Galaxy).",
+    stack: ["Python", "OpenCV", "MediaPipe"],
+    color: "orange",
+    github: "https://github.com/Oqexip",
+  },
+  {
+    title: "Web Portofolio",
+    category: "PORTFOLIO",
+    text: "Website portofolio interaktif dengan estetika neo-brutalist dan tema retro modern.",
+    stack: ["Next.js", "React", "Tailwind CSS"],
+    color: "purple",
+    github: "https://github.com/Oqexip",
+  },
+  {
     title: "River",
     category: "AI MOBILE",
     text: "Eksperimen mobile chatbot AI cerdas dengan antarmuka yang ultra-ringan dan responsif.",
@@ -57,22 +73,6 @@ const projects: Project[] = [
     color: "blue",
     github: "https://github.com/Oqexip",
   },
-  {
-    title: "Web Portofolio",
-    category: "PORTFOLIO",
-    text: "Website portofolio interaktif dengan estetika neo-brutalist dan tema retro modern.",
-    stack: ["Next.js", "React", "Tailwind CSS"],
-    color: "purple",
-    github: "https://github.com/Oqexip",
-  },
-  {
-    title: "Hand Tracking",
-    category: "COMPUTER VISION",
-    text: "Aplikasi filter kamera interaktif menggunakan gesture tangan (hand tracking) dengan MediaPipe dan OpenCV. Anda dapat membuat portal dengan jari Anda yang akan menerapkan berbagai filter menarik (Mono, Dual-Tone, Pixelate, Invert, Sepia, Blur, Thermal, Sketch, Glitch, Neon, Galaxy).",
-    stack: ["Python", "OpenCV", "MediaPipe"],
-    color: "orange",
-    github: "https://github.com/Oqexip",
-  },
 ];
 
 const ITEMS_PER_PAGE = 4;
@@ -84,7 +84,7 @@ export default function ProjectsPage() {
   const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
   const displayedProjects = projects.slice(
     startIndex,
-    startIndex + ITEMS_PER_PAGE
+    startIndex + ITEMS_PER_PAGE,
   );
 
   const handlePageChange = (page: number) => {
@@ -103,7 +103,11 @@ export default function ProjectsPage() {
       <main className="page-shell sub-page page-enter">
         <section className="page-heading" id="projects-heading">
           <h1 className="pixel-heading">
-            <FolderGit2 className="pixel-heading-icon" size={68} strokeWidth={2.5} />
+            <FolderGit2
+              className="pixel-heading-icon"
+              size={68}
+              strokeWidth={2.5}
+            />
             <span className="pixel-heading-my">MY</span>
             <span className="pixel-heading-box">PROJECTS</span>
           </h1>
@@ -238,7 +242,7 @@ export default function ProjectsPage() {
                   >
                     [{String(pageNum).padStart(2, "0")}]
                   </button>
-                )
+                ),
               )}
 
               <button
@@ -251,7 +255,8 @@ export default function ProjectsPage() {
               </button>
             </div>
             <div className="pagination-info">
-              PAGE {currentPage} OF {totalPages} // {projects.length} TOTAL PROJECTS
+              PAGE {currentPage} OF {totalPages} // {projects.length} TOTAL
+              PROJECTS
             </div>
           </nav>
         )}
