@@ -17,6 +17,11 @@ const pixel = Press_Start_2P({
 export const metadata: Metadata = {
   title: "Ilham Sikumbang — Portfolio",
   description: "Developer portfolio, built with a neobrutalist spirit.",
+  icons: {
+    icon: "/firefox.png",
+    shortcut: "/firefox.png",
+    apple: "/firefox.png",
+  },
 };
 
 export default function RootLayout({
