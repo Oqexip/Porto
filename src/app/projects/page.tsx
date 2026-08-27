@@ -47,7 +47,7 @@ const projects: Project[] = [
     text: "Aplikasi filter kamera interaktif menggunakan gesture tangan (hand tracking) dengan MediaPipe dan OpenCV. Anda dapat membuat portal dengan jari Anda yang akan menerapkan berbagai filter menarik (Mono, Dual-Tone, Pixelate, Invert, Sepia, Blur, Thermal, Sketch, Glitch, Neon, Galaxy).",
     stack: ["Python", "OpenCV", "MediaPipe"],
     color: "orange",
-    github: "https://github.com/Oqexip",
+    github: "https://github.com/Oqexip/handTracking.git",
   },
   {
     title: "Web Portofolio",
@@ -55,15 +55,17 @@ const projects: Project[] = [
     text: "Website portofolio interaktif dengan estetika neo-brutalist dan tema retro modern.",
     stack: ["Next.js", "React", "Tailwind CSS"],
     color: "purple",
+    image: "/projects-img/portofolio.png",
     github: "https://github.com/Oqexip",
+    preview: "hhttps://www.oqexip.site/", 
   },
   {
-    title: "River",
-    category: "AI MOBILE",
-    text: "Eksperimen mobile chatbot AI cerdas dengan antarmuka yang ultra-ringan dan responsif.",
-    stack: ["React Native", "Expo", "Mobile"],
+    title: "SkillShare",
+    category: "LMS",
+    text: "Tempat berbagi ilmu pengetahuan.",
+    stack: ["Laravel", "TailwindCSS", "Mobile"],
     color: "green",
-    github: "https://github.com/Oqexip",
+    github: "https://github.com/Oqexip/SkillShare.git",
   },
   {
     title: "Day Counter App",
@@ -72,6 +74,14 @@ const projects: Project[] = [
     stack: ["React", "Tailwind CSS", "Web"],
     color: "blue",
     github: "https://github.com/Oqexip",
+  },
+  {
+    title: "E-Ticketing",
+    category: "Travel Agency App",
+    text: "Aplikasi untuk memesan tiket pesawat. Dibuat dalam rangka sertifikasi Junior Programmer.",
+    stack: ["Laravel", "Tailwind CSS", "Web"],
+    color: "blue",
+    github: "https://github.com/Oqexip/LSP_E-Ticketing.git",
   },
 ];
 
