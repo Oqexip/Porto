@@ -29,6 +29,7 @@ const projects: Project[] = [
     text: "Platform sosial media anonim untuk berbagi pesan dan pemikiran secara bebas.",
     stack: ["Laravel", "Tailwind CSS", "Vercel"],
     color: "pink",
+    image: "/projects-img/omongin.png",
     github: "https://github.com/Oqexip/OmongIn.git",
   },
   {
@@ -42,12 +43,13 @@ const projects: Project[] = [
     preview: "https://easyvert.vercel.app/",
   },
   {
-    title: "Hand Tracking",
-    category: "COMPUTER VISION",
-    text: "Aplikasi filter kamera interaktif menggunakan gesture tangan (hand tracking) dengan MediaPipe dan OpenCV. Anda dapat membuat portal dengan jari Anda yang akan menerapkan berbagai filter menarik (Mono, Dual-Tone, Pixelate, Invert, Sepia, Blur, Thermal, Sketch, Glitch, Neon, Galaxy).",
-    stack: ["Python", "OpenCV", "MediaPipe"],
-    color: "orange",
-    github: "https://github.com/Oqexip/handTracking.git",
+    title: "E-Ticketing",
+    category: "Travel Agency App",
+    text: "Aplikasi untuk memesan tiket pesawat. Dibuat dalam rangka sertifikasi Junior Programmer.",
+    stack: ["Laravel", "Tailwind CSS", "Web"],
+    color: "blue",
+    image: "/projects-img/e-ticketing.png",
+    github: "https://github.com/Oqexip/LSP_E-Ticketing.git",
   },
   {
     title: "Web Portofolio",
@@ -57,7 +59,7 @@ const projects: Project[] = [
     color: "purple",
     image: "/projects-img/portofolio.png",
     github: "https://github.com/Oqexip",
-    preview: "hhttps://www.oqexip.site/", 
+    preview: "hhttps://www.oqexip.site/",
   },
   {
     title: "SkillShare",
@@ -76,12 +78,13 @@ const projects: Project[] = [
     github: "https://github.com/Oqexip",
   },
   {
-    title: "E-Ticketing",
-    category: "Travel Agency App",
-    text: "Aplikasi untuk memesan tiket pesawat. Dibuat dalam rangka sertifikasi Junior Programmer.",
-    stack: ["Laravel", "Tailwind CSS", "Web"],
-    color: "blue",
-    github: "https://github.com/Oqexip/LSP_E-Ticketing.git",
+    title: "Hand Tracking",
+    category: "COMPUTER VISION",
+    text: "Aplikasi filter kamera interaktif menggunakan gesture tangan (hand tracking) dengan MediaPipe dan OpenCV. Anda dapat membuat portal dengan jari Anda yang akan menerapkan berbagai filter menarik (Mono, Dual-Tone, Pixelate, Invert, Sepia, Blur, Thermal, Sketch, Glitch, Neon, Galaxy).",
+    stack: ["Python", "OpenCV", "MediaPipe"],
+    color: "orange",
+    image: "/projects-img/handTracker.png",
+    github: "https://github.com/Oqexip/handTracking.git",
   },
 ];
 
