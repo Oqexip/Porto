@@ -40,7 +40,7 @@ export default function ContactPage() {
           message,
           _subject: `Pesan Baru Portfolio dari ${name}`,
           _template: "table",
-          _captcha: "false",
+          _captcha: "true",
         }),
       });
 
@@ -88,13 +88,13 @@ export default function ContactPage() {
               ))}
             </div>
             <div className="social-row">
-              <a href="https://github.com/Oqexip" target="_blank" rel="noreferrer">
+              <a href="https://github.com/Oqexip" target="_blank" rel="noopener noreferrer">
                 <Code2 size={16} /> GITHUB
               </a>
-              <a href="https://www.instagram.com/ilhaaawm/" target="_blank" rel="noreferrer">
+              <a href="https://www.instagram.com/ilhaaawm/" target="_blank" rel="noopener noreferrer">
                 <Camera size={16} /> INSTAGRAM
               </a>
-              <a href="https://www.linkedin.com/in/ilham-sikumbang-3415752a0/" target="_blank" rel="noreferrer">
+              <a href="https://www.linkedin.com/in/ilham-sikumbang-3415752a0/" target="_blank" rel="noopener noreferrer">
                 <AtSign size={16} /> LINKEDIN
               </a>
             </div>

@@ -59,7 +59,7 @@ const projects: Project[] = [
     color: "purple",
     image: "/projects-img/portofolio.png",
     github: "https://github.com/Oqexip",
-    preview: "hhttps://www.oqexip.site/",
+    preview: "https://www.oqexip.site/",
   },
   {
     title: "SkillShare",
@@ -206,7 +206,7 @@ export default function ProjectsPage() {
                     <a
                       href={project.github}
                       target="_blank"
-                      rel="noreferrer"
+                      rel="noopener noreferrer"
                       className="project-btn project-btn-repo"
                       aria-label={`View ${project.title} Repository`}
                     >
@@ -216,7 +216,7 @@ export default function ProjectsPage() {
                       <a
                         href={project.preview}
                         target="_blank"
-                        rel="noreferrer"
+                        rel="noopener noreferrer"
                         className="project-btn project-btn-live"
                         aria-label={`View ${project.title} Live Preview`}
                       >

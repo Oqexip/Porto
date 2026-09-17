@@ -1,7 +1,6 @@
 "use client";
 
 import {
-  Music2,
   Pause,
   Play,
   Repeat2,
@@ -84,6 +83,15 @@ function displayTime(seconds: number) {
   return `${Math.floor(safe / 60)}:${String(safe % 60).padStart(2, "0")}`;
 }
 
+function calculateDaysSince(dateString: string): string {
+  const created = new Date(dateString);
+  const diffTime = Math.abs(new Date().getTime() - created.getTime());
+  const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+  return `${diffDays} DAYS`;
+}
+
+const GITHUB_CREATED_FALLBACK = "2023-11-20";
+
 export default function Home() {
   const [playing, setPlaying] = useState(false);
   const [loading, setLoading] = useState(0);
@@ -111,24 +119,11 @@ export default function Home() {
     fetch("https://api.github.com/users/Oqexip")
       .then((res) => (res.ok ? res.json() : null))
       .then((data) => {
-        if (data && data.created_at) {
-          const created = new Date(data.created_at);
-          const diffTime = Math.abs(new Date().getTime() - created.getTime());
-          const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-          setDaysInGame(`${diffDays} DAYS`);
-        } else {
-          // Fallback calculation based on registration date
-          const created = new Date("2023-11-20");
-          const diffTime = Math.abs(new Date().getTime() - created.getTime());
-          const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-          setDaysInGame(`${diffDays} DAYS`);
-        }
+        const dateStr = data?.created_at ?? GITHUB_CREATED_FALLBACK;
+        setDaysInGame(calculateDaysSince(dateStr));
       })
       .catch(() => {
-        const created = new Date("2023-11-20");
-        const diffTime = Math.abs(new Date().getTime() - created.getTime());
-        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-        setDaysInGame(`${diffDays} DAYS`);
+        setDaysInGame(calculateDaysSince(GITHUB_CREATED_FALLBACK));
       });
 
     // Fetch GitHub Contributions for TOTAL_CONTRIBUTION
