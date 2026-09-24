@@ -268,7 +268,7 @@ export default function ProjectsPage() {
               </button>
             </div>
             <div className="pagination-info">
-              PAGE {currentPage} OF {totalPages} // {projects.length} TOTAL
+              PAGE {currentPage} OF {totalPages} {"//"} {projects.length} TOTAL
               PROJECTS
             </div>
           </nav>

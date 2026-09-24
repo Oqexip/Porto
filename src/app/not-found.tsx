@@ -1,9 +1,11 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
 import { AlertOctagon, CornerDownRight, Home, RefreshCcw } from "lucide-react";
 import CursorTrail from "@/components/CursorTrail";
+import { errorActionStyles } from "@/components/errorActionStyles";
 
 const EXCUSES = [
   "The developer fell asleep coding this page.",
@@ -15,12 +17,9 @@ const EXCUSES = [
 
 export default function NotFound() {
   const [excuseIndex, setExcuseIndex] = useState(0);
-  const [path, setPath] = useState("/unknown-route");
+  const path = usePathname() ?? "/unknown-route";
 
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      setPath(window.location.pathname);
-    }
     document.documentElement.classList.add("error-html-bg");
     document.body.classList.add("error-body-bg");
     return () => {
@@ -43,24 +42,37 @@ export default function NotFound() {
             <AlertOctagon size={16} className="anim-pulse" />
           </div>
           <div className="error-body">
-            <p className="err-path">
+            <p className="flex items-center gap-1.5 text-sm font-black text-[var(--pink)]">
               <CornerDownRight size={14} /> GET {path}
             </p>
             <h1>FATAL 404</h1>
-            <p className="err-desc">
+            <p className={errorActionStyles.description}>
               Route not found. The requested page appears to have escaped into the void.
             </p>
 
-            <div className="excuse-box">
-              <span className="excuse-label">EXCUSE GENERATOR:</span>
-              <p>&quot;{EXCUSES[excuseIndex]}&quot;</p>
-              <button className="excuse-btn" onClick={randomizeExcuse}>
+            <div className="my-6 flex flex-col gap-2 border-2 border-dashed border-[var(--yellow)] bg-[rgba(248,231,28,0.05)] p-4">
+              <span
+                className="text-[11px] font-black text-[var(--yellow)]"
+                style={{ fontFamily: "var(--font-geist-mono)" }}
+              >
+                EXCUSE GENERATOR:
+              </span>
+              <p className="m-0 text-sm italic">&quot;{EXCUSES[excuseIndex]}&quot;</p>
+              <button
+                className={errorActionStyles.button}
+                style={{ fontFamily: "var(--font-geist-mono)" }}
+                onClick={randomizeExcuse}
+              >
                 <RefreshCcw size={13} /> Generate Another
               </button>
             </div>
 
             <div className="error-actions">
-              <Link href="/" className="back-link-btn">
+              <Link
+                href="/"
+                className={errorActionStyles.backLink}
+                style={{ fontFamily: "var(--font-pixel)" }}
+              >
                 <Home size={15} /> BACK TO HOME
               </Link>
             </div>

@@ -145,33 +145,24 @@ export default function Home() {
       });
   }, []);
 
-  // Sync play state
+  // Keep the audio source and playback state in sync without reloading on pause.
   useEffect(() => {
-    if (!audioRef.current) return;
+    const audio = audioRef.current;
+    if (!audio) return;
+    const songUrl = songs[currentSongIndex].url;
+    if (audio.src !== songUrl) {
+      audio.src = songUrl;
+      audio.load();
+    }
     if (playing) {
-      audioRef.current.play().catch((err) => {
+      audio.play().catch((err) => {
         console.error("Playback failed:", err);
         setPlaying(false);
       });
     } else {
-      audioRef.current.pause();
+      audio.pause();
     }
-  }, [playing]);
-
-  // Sync track change
-  useEffect(() => {
-    if (!audioRef.current) return;
-    audioRef.current.src = songs[currentSongIndex].url;
-    audioRef.current.load();
-    if (playing) {
-      audioRef.current.play().catch((err) => {
-        console.error("Playback failed:", err);
-        setPlaying(false);
-      });
-    } else {
-      setProgress(0);
-    }
-  }, [currentSongIndex]);
+  }, [currentSongIndex, playing]);
 
   // Sync loop state
   useEffect(() => {
@@ -260,6 +251,7 @@ export default function Home() {
             <section className="poster-player">
               <audio
                 ref={audioRef}
+                onLoadStart={() => setProgress(0)}
                 onTimeUpdate={(e) => setProgress(e.currentTarget.currentTime)}
                 onDurationChange={(e) =>
                   setDuration(e.currentTarget.duration || 30)
