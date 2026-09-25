@@ -85,12 +85,10 @@ function displayTime(seconds: number) {
 
 function calculateDaysSince(dateString: string): string {
   const created = new Date(dateString);
-  const diffTime = Math.abs(new Date().getTime() - created.getTime());
-  const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-  return `${diffDays} DAYS`;
+  const diffTime = Date.now() - created.getTime();
+  if (!Number.isFinite(diffTime) || diffTime < 0) return "UNAVAILABLE";
+  return `${Math.floor(diffTime / (1000 * 60 * 60 * 24))} DAYS`;
 }
-
-const GITHUB_CREATED_FALLBACK = "2023-11-20";
 
 export default function Home() {
   const [playing, setPlaying] = useState(false);
@@ -119,29 +117,37 @@ export default function Home() {
     fetch("https://api.github.com/users/Oqexip")
       .then((res) => (res.ok ? res.json() : null))
       .then((data) => {
-        const dateStr = data?.created_at ?? GITHUB_CREATED_FALLBACK;
-        setDaysInGame(calculateDaysSince(dateStr));
+        setDaysInGame(
+          typeof data?.created_at === "string"
+            ? calculateDaysSince(data.created_at)
+            : "UNAVAILABLE",
+        );
       })
       .catch(() => {
-        setDaysInGame(calculateDaysSince(GITHUB_CREATED_FALLBACK));
+        setDaysInGame("UNAVAILABLE");
       });
 
     // Fetch GitHub Contributions for TOTAL_CONTRIBUTION
     fetch("https://github-contributions-api.jogruber.de/v4/Oqexip")
       .then((res) => (res.ok ? res.json() : null))
       .then((data) => {
-        if (data && data.total) {
-          const total = Object.values(data.total).reduce(
-            (acc: number, val: unknown) => acc + (Number(val) || 0),
-            0,
-          );
-          setTotalContributions(`${total} PTS`);
-        } else {
-          setTotalContributions("327 PTS");
+        if (!data?.total || typeof data.total !== "object") {
+          setTotalContributions("UNAVAILABLE");
+          return;
         }
+        const counts = Object.values(data.total);
+        if (
+          counts.length === 0 ||
+          counts.some((count) => typeof count !== "number" || !Number.isFinite(count) || count < 0)
+        ) {
+          setTotalContributions("UNAVAILABLE");
+          return;
+        }
+        const total = (counts as number[]).reduce((sum, count) => sum + count, 0);
+        setTotalContributions(total.toLocaleString("en-US"));
       })
       .catch(() => {
-        setTotalContributions("327 PTS");
+        setTotalContributions("UNAVAILABLE");
       });
   }, []);
 
@@ -178,12 +184,9 @@ export default function Home() {
     }
   }, [muted]);
 
-  const handleProgressClick = (e: React.MouseEvent<HTMLDivElement>) => {
+  const handleSeekChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!audioRef.current) return;
-    const rect = e.currentTarget.getBoundingClientRect();
-    const clickX = e.clientX - rect.left;
-    const width = rect.width;
-    const newTime = (clickX / width) * duration;
+    const newTime = Number(e.currentTarget.value);
     audioRef.current.currentTime = newTime;
     setProgress(newTime);
   };
@@ -224,7 +227,7 @@ export default function Home() {
             <div className="poster-stats">
               <div className="poster-stats-title">≡ STATS.JSON</div>
               <div>
-                <span>TOTAL_CONTRIBUTION</span>
+                <span>CONTRIBUTIONS</span>
                 <b>{totalContributions}</b>
               </div>
               <div>
@@ -253,9 +256,14 @@ export default function Home() {
                 ref={audioRef}
                 onLoadStart={() => setProgress(0)}
                 onTimeUpdate={(e) => setProgress(e.currentTarget.currentTime)}
-                onDurationChange={(e) =>
-                  setDuration(e.currentTarget.duration || 30)
-                }
+                onDurationChange={(e) => {
+                  const audioDuration = e.currentTarget.duration;
+                  setDuration(
+                    Number.isFinite(audioDuration) && audioDuration > 0
+                      ? audioDuration
+                      : 30,
+                  );
+                }}
                 onEnded={() => {
                   setPlaying(false);
                   setProgress(0);
@@ -359,12 +367,22 @@ export default function Home() {
                   </button>
                 </div>
               </div>
-              <div
-                className="poster-progress"
-                onClick={handleProgressClick}
-                style={{ cursor: "pointer" }}
-              >
-                <span style={{ width: `${(progress / duration) * 100}%` }} />
+              <div className="poster-progress">
+                <span
+                  style={{
+                    transform: `scaleX(${Math.min(1, Math.max(0, progress / duration))})`,
+                  }}
+                />
+                <input
+                  type="range"
+                  min={0}
+                  max={duration}
+                  step={0.1}
+                  value={Math.min(progress, duration)}
+                  onChange={handleSeekChange}
+                  aria-label="Seek within song"
+                  aria-valuetext={`${displayTime(progress)} of ${displayTime(duration)}`}
+                />
               </div>
               <div className="poster-times">
                 <span>{displayTime(progress)}</span>

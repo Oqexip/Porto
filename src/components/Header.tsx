@@ -31,7 +31,7 @@ export default function Header({ back = false }: { back?: boolean }) {
             ← BACK TO HOME
           </Link>
         ) : (
-          <nav className="desktop-nav">
+          <nav className="desktop-nav" aria-label="Primary navigation">
             {links.map(([label, href]) => (
               <Link key={href} href={href}>
                 {label}
@@ -64,15 +64,16 @@ export default function Header({ back = false }: { back?: boolean }) {
           </button>
           <button
             className="mobile-toggle"
-            onClick={() => setOpen(!open)}
-            aria-label="Toggle menu"
+            onClick={() => setOpen((wasOpen) => !wasOpen)}
+            aria-label={open ? "Close menu" : "Open menu"}
+            aria-expanded={open}
+            aria-controls="mobile-menu"
           >
             {open ? <X size={21} strokeWidth={2.5} /> : <Menu size={21} strokeWidth={2.5} />}
           </button>
         </div>
       </div>
-      {open && (
-        <nav className="mobile-menu">
+        <nav className="mobile-menu" id="mobile-menu" aria-label="Mobile navigation" hidden={!open}>
           {links.map(([label, href]) => (
             <Link key={href} href={href} onClick={() => setOpen(false)}>
               {label}
@@ -89,7 +90,6 @@ export default function Header({ back = false }: { back?: boolean }) {
             ☠ DON&apos;T CLICK ME
           </button>
         </nav>
-      )}
     </header>
   );
 }
