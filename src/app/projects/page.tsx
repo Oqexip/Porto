@@ -19,12 +19,30 @@ interface Project {
   text: string;
   stack: string[];
   color: string;
-  github: string;
+  github?: string;
   preview?: string;
   image?: string;
 }
 
 const projects: Project[] = [
+  {
+    title: "Teknik Fair",
+    category: "EVENT",
+    text: "Website open house Fakultas Teknik Universitas Gadjah Mada.",
+    stack: ["Next.js", "TypeScript", "Tailwind CSS"],
+    color: "blue",
+    image: "/projects-img/teknikFair.png",
+    preview: "https://teknikfair.com",
+  },
+  {
+    title: "Website KPU KMTETI",
+    category: "ELECTION",
+    text: "Website resmi KPU KMTETI untuk pemilihan umum Technoration 2026, berisi informasi kandidat dan tahapan pemilu.",
+    stack: ["React", "Vite", "Supabase"],
+    color: "red",
+    image: "/projects-img/kpuKMTETI.png",
+    preview: "https://www.technorationkpukmteti-2026.my.id/",
+  },
   {
     title: "OmongIn",
     category: "SOCIAL MEDIA",
@@ -58,35 +76,17 @@ const projects: Project[] = [
     category: "PORTFOLIO",
     text: "Website portofolio interaktif dengan estetika neo-brutalist dan tema retro modern.",
     stack: ["Next.js", "React", "Tailwind CSS"],
-    color: "purple",
+    color: "red",
     image: "/projects-img/portofolio.png",
     github: "https://github.com/Oqexip",
     preview: "https://www.oqexip.site/",
-  },
-  {
-    title: "Website KPU KMTETI",
-    category: "ELECTION",
-    text: "Website resmi KPU KMTETI untuk pemilihan umum Technoration 2026, berisi informasi kandidat dan tahapan pemilu.",
-    stack: ["React", "Vite", "Supabase"],
-    color: "green",
-    image: "/projects-img/kpuKMTETI.png",
-    github: "https://github.com/Kidingdops/Website-KPU.KMTETI",
-    preview: "https://www.technorationkpukmteti-2026.my.id/",
-  },
-  {
-    title: "Day Counter App",
-    category: "UTILITY",
-    text: "Aplikasi kecil untuk menghitung hari penting dengan pengalaman visual yang menyenangkan.",
-    stack: ["React", "Tailwind CSS", "Web"],
-    color: "blue",
-    github: "https://github.com/Oqexip",
   },
   {
     title: "Hand Tracking",
     category: "COMPUTER VISION",
     text: "Aplikasi filter kamera interaktif menggunakan gesture tangan (hand tracking) dengan MediaPipe dan OpenCV. Anda dapat membuat portal dengan jari Anda yang akan menerapkan berbagai filter menarik (Mono, Dual-Tone, Pixelate, Invert, Sepia, Blur, Thermal, Sketch, Glitch, Neon, Galaxy).",
     stack: ["Python", "OpenCV", "MediaPipe"],
-    color: "orange",
+    color: "pink",
     image: "/projects-img/handTracker.png",
     github: "https://github.com/Oqexip/handTracking.git",
   },
@@ -152,45 +152,6 @@ export default function ProjectsPage() {
           <div className="status-strip">
             STATUS: BUILDING / COMMITS: TOO MANY
           </div>
-        </section>
-
-        <section className="project-filters" aria-label="Find projects">
-          <div className="project-search-field">
-            <label htmlFor="project-search">SEARCH PROJECTS</label>
-            <div className="project-search-input">
-              <Search size={19} aria-hidden="true" />
-              <input
-                id="project-search"
-                type="search"
-                value={query}
-                onChange={(event) => {
-                  setQuery(event.target.value);
-                  setCurrentPage(1);
-                }}
-                placeholder="Name, technology, or keyword"
-              />
-            </div>
-          </div>
-          <div className="project-category-field">
-            <label htmlFor="project-category">CATEGORY</label>
-            <select
-              id="project-category"
-              value={category}
-              onChange={(event) => {
-                setCategory(event.target.value);
-                setCurrentPage(1);
-              }}
-            >
-              {categories.map((item) => (
-                <option key={item} value={item}>
-                  {item.toUpperCase()}
-                </option>
-              ))}
-            </select>
-          </div>
-          <p className="project-results" role="status">
-            SHOWING {filteredProjects.length} OF {projects.length} PROJECTS
-          </p>
         </section>
 
         <section className="project-grid">
@@ -263,15 +224,17 @@ export default function ProjectsPage() {
                   <div className="project-card-divider" />
 
                   <div className="project-actions">
-                    <a
-                      href={project.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="project-btn project-btn-repo"
-                      aria-label={`View ${project.title} Repository`}
-                    >
-                      <GitFork size={15} strokeWidth={2.5} /> REPO
-                    </a>
+                    {project.github && (
+                      <a
+                        href={project.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="project-btn project-btn-repo"
+                        aria-label={`View ${project.title} Repository`}
+                      >
+                        <GitFork size={15} strokeWidth={2.5} /> REPO
+                      </a>
+                    )}
                     {project.preview && (
                       <a
                         href={project.preview}

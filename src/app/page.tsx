@@ -415,9 +415,6 @@ export default function Home() {
                     <span key={skill}>{skill}</span>
                   ))}
                 </div>
-                <p className="poster-prompt">
-                  root@ilham-server:~# <i />
-                </p>
               </div>
             </section>
           </section>

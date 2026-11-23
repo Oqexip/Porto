@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { BarChart3, Menu, Moon, Sun, X } from "lucide-react";
+import { Menu, Moon, Sun, X } from "lucide-react";
 import { useTheme } from "next-themes";
 import { useState, useSyncExternalStore } from "react";
 import { useRouter } from "next/navigation";
@@ -40,14 +40,6 @@ export default function Header({ back = false }: { back?: boolean }) {
           </nav>
         )}
         <div className="header-actions">
-          <Link
-            href="/analytics"
-            className="analytics-link"
-            aria-label="View site analytics"
-            title="Site analytics"
-          >
-            <BarChart3 size={21} />
-          </Link>
           <button
             className="theme-toggle"
             onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
