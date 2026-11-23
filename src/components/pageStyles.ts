@@ -26,5 +26,7 @@ export const pixelHeadingBoxTeal = pixelHeadingBox.replace("bg-[#ffe600]", "bg-[
 export const brutalButton =
   "border-[3px] border-[#111] px-[17px] py-3 font-mono text-[13px] leading-[normal] font-black text-[#111] shadow-[4px_4px_0_#111] transition-all duration-150 ease-[ease] hover:translate-x-[3px] hover:translate-y-[3px] hover:shadow-[0_0_0_currentColor]";
 
+export const terminalCursor = "ml-1 inline-block animate-blink motion-reduce:animate-none";
+
 export const statusStrip =
   "mt-[17px] inline-block border-[3px] border-[#111] bg-yellow px-[11px] py-2 font-mono text-[11px] leading-[normal] font-black text-[#111] shadow-[4px_4px_0_#111]";

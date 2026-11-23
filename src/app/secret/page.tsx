@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useState, useEffect, useRef } from "react";
 import CursorTrail from "@/components/CursorTrail";
 import SecretTerminal from "@/components/SecretTerminal";
+import { terminalCursor } from "@/components/pageStyles";
 
 interface LogLine {
   prefix: string;
@@ -74,14 +75,12 @@ export default function SecretPage() {
     <>
       <CursorTrail />
       <main
-        className="grid min-h-screen place-items-center overflow-hidden bg-black p-10 text-[#eee] max-[700px]:p-[15px]"
-        style={{ fontFamily: "var(--font-geist-mono)" }}
+        className="grid min-h-screen place-items-center overflow-hidden bg-black p-10 font-mono text-[#eee] max-[700px]:p-[15px]"
       >
         <section className="relative min-h-[850px] w-[min(900px,100%)] border-[5px] border-[#ff4136] bg-[#151515] p-[52px_56px] shadow-[14px_14px_0_#ff4136] max-[700px]:min-h-[720px] max-[700px]:p-[28px_22px]">
           <header className="grid grid-cols-[1fr_220px_70px] items-start gap-[18px] border-b-[5px] border-[#ff4136] pb-6 text-[#ff4136] max-[700px]:grid-cols-1 max-[700px]:gap-[15px]">
             <h1
-              className="m-0 text-[27px] leading-[1.4] font-normal max-[700px]:text-[18px]"
-              style={{ fontFamily: "var(--font-pixel)" }}
+              className="m-0 font-retro text-[27px] leading-[1.4] font-normal max-[700px]:text-[18px]"
             >
               ☠ CLASSIFIED TERMINAL
             </h1>
@@ -104,7 +103,7 @@ export default function SecretPage() {
                 return (
                   <p key={index} className={`m-0 mb-[19px] ${line.className ?? "text-[#50e3c2]"}`}>
                     <b className="text-[#fff000]">{line.prefix}</b> {currentText}
-                    <span className="terminal-cursor">▋</span>
+                    <span className={terminalCursor}>▋</span>
                   </p>
                 );
               } else {
@@ -114,8 +113,7 @@ export default function SecretPage() {
           </div>
           {isFinished && <div className="relative min-h-[290px] border-t-2 border-dashed border-[#50e3c2] p-[24px_15px] text-center">
             <h2
-              className="m-0 mb-[13px] text-[15px] leading-[1.5] font-normal max-[700px]:text-[11px]"
-              style={{ fontFamily: "var(--font-pixel)" }}
+              className="m-0 mb-[13px] font-retro text-[15px] leading-[1.5] font-normal max-[700px]:text-[11px]"
             >
               &gt; INCOMING THREAT: PRODUCTION BUGS DETECTED!
             </h2>
@@ -126,7 +124,7 @@ export default function SecretPage() {
               <button
                 key={bug.id}
                 ref={bug.id === 0 ? firstBugRef : undefined}
-                className="secret-bug absolute border-0 bg-transparent text-[#ff4136] hover:scale-[1.3]"
+                className="absolute min-h-11 min-w-11 animate-bug-move focus-visible:outline-[3px] focus-visible:outline-offset-2 focus-visible:outline-[#fff000] motion-reduce:animate-none border-0 bg-transparent text-[#ff4136] hover:scale-[1.3]"
                 style={{ left: `${bug.x}%`, top: `${bug.y}%` }}
                 onClick={() => squash(bug.id)}
                 aria-label={`Squash bug ${bug.id + 1} of ${INITIAL_BUGS.length}`}
@@ -137,8 +135,7 @@ export default function SecretPage() {
           </div>}
           {isFinished && <Link
             href="/"
-            className="mx-auto mt-8 block w-max border-4 border-[#50e3c2] p-[20px_28px] text-sm font-normal shadow-[5px_5px_0_#50e3c2] max-[700px]:p-4 max-[700px]:text-[10px]"
-            style={{ fontFamily: "var(--font-pixel)" }}
+            className="mx-auto mt-8 block w-max border-4 border-[#50e3c2] p-[20px_28px] text-sm font-normal shadow-[5px_5px_0_#50e3c2] font-retro max-[700px]:p-4 max-[700px]:text-[10px]"
           >
             RETURN TO SAFETY
           </Link>}

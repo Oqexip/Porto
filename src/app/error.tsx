@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 import ErrorContent from "@/components/ErrorContent";
+import { errorPage } from "@/components/errorActionStyles";
 
 export default function ErrorPage({
   error,
@@ -15,7 +16,7 @@ export default function ErrorPage({
   }, [error]);
 
   return (
-    <main className="error-page page-enter">
+    <main className={errorPage}>
       <ErrorContent
         title="SOMETHING WENT WRONG"
         headerText="root@ilham-server:~ / ERROR.LOG"

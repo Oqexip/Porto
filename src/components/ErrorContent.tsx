@@ -2,7 +2,13 @@
 
 import { AlertOctagon, RefreshCcw, Home } from "lucide-react";
 import Link from "next/link";
-import { errorActionStyles } from "./errorActionStyles";
+import {
+  errorActionStyles,
+  errorBody,
+  errorCard,
+  errorHead,
+  errorTitle,
+} from "./errorActionStyles";
 
 interface ErrorContentProps {
   title: string;
@@ -18,33 +24,25 @@ export default function ErrorContent({
   reset,
 }: ErrorContentProps) {
   return (
-    <section className="error-card">
-      <div className="error-head">
+    <section className={errorCard}>
+      <div className={errorHead}>
         <span>{headerText}</span>
-        <AlertOctagon size={16} className="anim-pulse" />
+        <AlertOctagon size={16} />
       </div>
-      <div className="error-body">
-        <h1>{title}</h1>
+      <div className={errorBody}>
+        <h1 className={errorTitle}>{title}</h1>
         <p className={errorActionStyles.description}>
           {message || "An unexpected error occurred."}
         </p>
-        <div
-          className="error-actions"
-          style={{ marginTop: "20px", display: "flex", gap: "10px" }}
-        >
+        <div className="mt-5 flex gap-2.5">
           <button
             type="button"
             className={errorActionStyles.button}
-            style={{ fontFamily: "var(--font-geist-mono)" }}
             onClick={() => reset()}
           >
             <RefreshCcw size={14} /> TRY AGAIN
           </button>
-          <Link
-            href="/"
-            className={errorActionStyles.backLink}
-            style={{ fontFamily: "var(--font-pixel)" }}
-          >
+          <Link href="/" className={errorActionStyles.backLink}>
             <Home size={15} /> BACK TO HOME
           </Link>
         </div>
