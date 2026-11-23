@@ -1,8 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import CursorTrail from "@/components/CursorTrail";
+import SecretTerminal from "@/components/SecretTerminal";
 
 interface LogLine {
   prefix: string;
@@ -11,7 +12,7 @@ interface LogLine {
 }
 
 const LOG_LINES: LogLine[] = [
-  { prefix: "ad/min@system:~#", text: "INITIATING BREACH PROTOCOL..." },
+  { prefix: "admin@system:~#", text: "INITIATING BREACH PROTOCOL..." },
   { prefix: "admin@system:~#", text: "ACCESS GRANTED." },
   { prefix: "admin@system:~#", text: "DOWNLOADING TOP SECRET FILES..." },
   { prefix: "admin@system:~#", text: "WARNING: UNAUTHORIZED USER DETECTED!", className: "text-[#ff4136] font-black" },
@@ -20,18 +21,19 @@ const LOG_LINES: LogLine[] = [
   { prefix: "admin@system:~#", text: "" },
 ];
 
+const INITIAL_BUGS = Array.from({ length: 8 }, (_, id) => ({
+  id,
+  x: 12 + ((id * 11) % 74),
+  y: 62 + ((id * 19) % 25),
+}));
+
 export default function SecretPage() {
-  const [squashed, setSquashed] = useState(0);
-  const [bugs, setBugs] = useState(
-    Array.from({ length: 8 }, (_, id) => ({
-      id,
-      x: 12 + ((id * 11) % 74),
-      y: 62 + ((id * 19) % 25),
-    })),
-  );
+  const [bugs, setBugs] = useState(INITIAL_BUGS);
   const [currentLineIndex, setCurrentLineIndex] = useState(0);
   const [currentText, setCurrentText] = useState("");
+  const firstBugRef = useRef<HTMLButtonElement>(null);
   const isFinished = currentLineIndex >= LOG_LINES.length;
+  const squashed = INITIAL_BUGS.length - bugs.length;
 
   useEffect(() => {
     if (currentLineIndex >= LOG_LINES.length) {
@@ -54,9 +56,18 @@ export default function SecretPage() {
     }
   }, [currentLineIndex, currentText]);
 
+  useEffect(() => {
+    if (isFinished && bugs.length === INITIAL_BUGS.length) {
+      firstBugRef.current?.focus();
+    }
+  }, [isFinished, bugs.length]);
+
   function squash(id: number) {
-    setSquashed((value) => value + 1);
     setBugs((items) => items.filter((bug) => bug.id !== id));
+  }
+
+  if (isFinished && bugs.length === 0) {
+    return <SecretTerminal bugCount={INITIAL_BUGS.length} onReplay={() => setBugs(INITIAL_BUGS)} />;
   }
 
   return (
@@ -101,7 +112,7 @@ export default function SecretPage() {
               }
             })}
           </div>
-          <div className={`relative min-h-[170px] border-t-2 border-dashed border-[#50e3c2] p-[24px_15px] text-center transition-[opacity,transform] duration-500 ${isFinished ? "translate-y-0 opacity-100 pointer-events-auto" : "translate-y-[10px] opacity-0 pointer-events-none"}`}>
+          {isFinished && <div className="relative min-h-[290px] border-t-2 border-dashed border-[#50e3c2] p-[24px_15px] text-center">
             <h2
               className="m-0 mb-[13px] text-[15px] leading-[1.5] font-normal max-[700px]:text-[11px]"
               style={{ fontFamily: "var(--font-pixel)" }}
@@ -109,28 +120,28 @@ export default function SecretPage() {
               &gt; INCOMING THREAT: PRODUCTION BUGS DETECTED!
             </h2>
             <p className="m-0 text-[15px] max-[700px]:text-xs">
-              Squash as many bugs as you can before they escape. They&apos;re
-              fast.
+              Squash all {INITIAL_BUGS.length} bugs to unlock the terminal.
             </p>
             {bugs.map((bug) => (
               <button
                 key={bug.id}
+                ref={bug.id === 0 ? firstBugRef : undefined}
                 className="secret-bug absolute border-0 bg-transparent text-[30px] text-[#ff4136] hover:scale-[1.3]"
                 style={{ left: `${bug.x}%`, top: `${bug.y}%` }}
                 onClick={() => squash(bug.id)}
-                aria-label="Squash bug"
+                aria-label={`Squash bug ${bug.id + 1} of ${INITIAL_BUGS.length}`}
               >
                 ☠
               </button>
             ))}
-          </div>
-          <Link
+          </div>}
+          {isFinished && <Link
             href="/"
-            className={`mx-auto mt-8 block w-max border-4 border-[#50e3c2] p-[20px_28px] text-sm font-normal text-[#50e3c2] shadow-[5px_5px_0_#50e3c2] transition-[opacity,transform] duration-500 max-[700px]:p-4 max-[700px]:text-[10px] ${isFinished ? "translate-y-0 opacity-100 pointer-events-auto" : "translate-y-[10px] opacity-0 pointer-events-none"}`}
+            className="mx-auto mt-8 block w-max border-4 border-[#50e3c2] p-[20px_28px] text-sm font-normal text-[#50e3c2] shadow-[5px_5px_0_#50e3c2] max-[700px]:p-4 max-[700px]:text-[10px]"
             style={{ fontFamily: "var(--font-pixel)" }}
           >
             RETURN TO SAFETY
-          </Link>
+          </Link>}
         </section>
       </main>
     </>

@@ -8,6 +8,8 @@ import {
   ExternalLink,
   FolderGit2,
   GitFork,
+  Search,
+  X,
 } from "lucide-react";
 import Header from "@/components/Header";
 
@@ -89,16 +91,33 @@ const projects: Project[] = [
 ];
 
 const ITEMS_PER_PAGE = 4;
+const categories = ["ALL CATEGORIES", ...new Set(projects.map((project) => project.category))];
 
 export default function ProjectsPage() {
   const [currentPage, setCurrentPage] = useState(1);
+  const [query, setQuery] = useState("");
+  const [category, setCategory] = useState("ALL CATEGORIES");
 
-  const totalPages = Math.ceil(projects.length / ITEMS_PER_PAGE);
+  const searchTerm = query.trim().toLocaleLowerCase();
+  const filteredProjects = projects.filter((project) => {
+    const matchesCategory = category === "ALL CATEGORIES" || project.category === category;
+    const searchableText = [project.title, project.category, project.text, ...project.stack]
+      .join(" ")
+      .toLocaleLowerCase();
+    return matchesCategory && searchableText.includes(searchTerm);
+  });
+  const totalPages = Math.ceil(filteredProjects.length / ITEMS_PER_PAGE);
   const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
-  const displayedProjects = projects.slice(
+  const displayedProjects = filteredProjects.slice(
     startIndex,
     startIndex + ITEMS_PER_PAGE,
   );
+
+  const clearFilters = () => {
+    setQuery("");
+    setCategory("ALL CATEGORIES");
+    setCurrentPage(1);
+  };
 
   const handlePageChange = (page: number) => {
     if (page >= 1 && page <= totalPages) {
@@ -131,6 +150,45 @@ export default function ProjectsPage() {
           <div className="status-strip">
             STATUS: BUILDING / COMMITS: TOO MANY
           </div>
+        </section>
+
+        <section className="project-filters" aria-label="Find projects">
+          <div className="project-search-field">
+            <label htmlFor="project-search">SEARCH PROJECTS</label>
+            <div className="project-search-input">
+              <Search size={19} aria-hidden="true" />
+              <input
+                id="project-search"
+                type="search"
+                value={query}
+                onChange={(event) => {
+                  setQuery(event.target.value);
+                  setCurrentPage(1);
+                }}
+                placeholder="Name, technology, or keyword"
+              />
+            </div>
+          </div>
+          <div className="project-category-field">
+            <label htmlFor="project-category">CATEGORY</label>
+            <select
+              id="project-category"
+              value={category}
+              onChange={(event) => {
+                setCategory(event.target.value);
+                setCurrentPage(1);
+              }}
+            >
+              {categories.map((item) => (
+                <option key={item} value={item}>
+                  {item.toUpperCase()}
+                </option>
+              ))}
+            </select>
+          </div>
+          <p className="project-results" role="status">
+            SHOWING {filteredProjects.length} OF {projects.length} PROJECTS
+          </p>
         </section>
 
         <section className="project-grid">
@@ -230,6 +288,17 @@ export default function ProjectsPage() {
           })}
         </section>
 
+        {filteredProjects.length === 0 && (
+          <div className="project-empty">
+            <Search size={30} aria-hidden="true" />
+            <h2>NO MATCHES FOUND</h2>
+            <p>Try another name, technology, or category.</p>
+            <button type="button" onClick={clearFilters}>
+              <X size={16} aria-hidden="true" /> CLEAR FILTERS
+            </button>
+          </div>
+        )}
+
         {/* Pagination Section */}
         {totalPages > 1 && (
           <nav className="project-pagination" aria-label="Projects pagination">
@@ -268,7 +337,7 @@ export default function ProjectsPage() {
               </button>
             </div>
             <div className="pagination-info">
-              PAGE {currentPage} OF {totalPages} {"//"} {projects.length} TOTAL
+              PAGE {currentPage} OF {totalPages} {"//"} {filteredProjects.length} MATCHING
               PROJECTS
             </div>
           </nav>
