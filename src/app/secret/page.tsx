@@ -126,7 +126,7 @@ export default function SecretPage() {
               <button
                 key={bug.id}
                 ref={bug.id === 0 ? firstBugRef : undefined}
-                className="secret-bug absolute border-0 bg-transparent text-[30px] text-[#ff4136] hover:scale-[1.3]"
+                className="secret-bug absolute border-0 bg-transparent text-[#ff4136] hover:scale-[1.3]"
                 style={{ left: `${bug.x}%`, top: `${bug.y}%` }}
                 onClick={() => squash(bug.id)}
                 aria-label={`Squash bug ${bug.id + 1} of ${INITIAL_BUGS.length}`}
@@ -137,7 +137,7 @@ export default function SecretPage() {
           </div>}
           {isFinished && <Link
             href="/"
-            className="mx-auto mt-8 block w-max border-4 border-[#50e3c2] p-[20px_28px] text-sm font-normal text-[#50e3c2] shadow-[5px_5px_0_#50e3c2] max-[700px]:p-4 max-[700px]:text-[10px]"
+            className="mx-auto mt-8 block w-max border-4 border-[#50e3c2] p-[20px_28px] text-sm font-normal shadow-[5px_5px_0_#50e3c2] max-[700px]:p-4 max-[700px]:text-[10px]"
             style={{ fontFamily: "var(--font-pixel)" }}
           >
             RETURN TO SAFETY

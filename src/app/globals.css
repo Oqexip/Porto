@@ -1,5 +1,126 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme inline {
+  /* Palette (switches with the .dark class via the variables below) */
+  --color-bg: var(--bg);
+  --color-ink: var(--ink);
+  --color-paper: var(--paper);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-blue: var(--blue);
+  --color-yellow: var(--yellow);
+  --color-green: var(--green);
+  --color-red: var(--red);
+  --color-pink: var(--pink);
+
+  /* Fonts loaded by next/font in layout.tsx */
+  --font-sans: var(--font-geist), Arial, sans-serif;
+  --font-mono: var(--font-geist-mono);
+  --font-retro: var(--font-pixel);
+}
+
+@theme {
+  /* Layout breakpoints. `max-x:` applies below the value, `x:` from it upward. */
+  --breakpoint-xs: 561px; /* max-xs: = phones up to 560px */
+  --breakpoint-phone: 681px; /* max-phone: = up to 680px */
+  --breakpoint-narrow: 701px; /* max-narrow: = up to 700px */
+  --breakpoint-tablet: 851px; /* max-tablet: = up to 850px */
+  --breakpoint-tablet-lg: 861px; /* max-tablet-lg: = up to 860px */
+  --breakpoint-desk: 1051px; /* desk: = 1051px and wider */
+
+  --animate-page-enter: page-enter 0.55s ease both;
+  --animate-menu-slide: menu-slide 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  --animate-spin-slow: spin 2s linear infinite;
+  --animate-cert-fade: cert-fade 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  --animate-trail-fade: trail-fade 0.24s ease-out forwards;
+  --animate-bug-move: bug-move 1.2s steps(2) infinite;
+  --animate-terminal-appear: terminal-appear 350ms ease-out both;
+  --animate-blink: blink 1s step-end infinite;
+  --animate-bob: bob 1s ease-in-out infinite alternate;
+
+  @keyframes page-enter {
+    from {
+      opacity: 0;
+      transform: translateY(18px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  @keyframes menu-slide {
+    from {
+      opacity: 0;
+      transform: translateY(-8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes cert-fade {
+    from {
+      opacity: 0;
+      transform: translateY(6px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes trail-fade {
+    from {
+      scale: 1;
+      opacity: 0.95;
+    }
+    to {
+      scale: 0.35;
+      opacity: 0;
+    }
+  }
+
+  @keyframes bug-move {
+    50% {
+      translate: 15px -8px;
+    }
+  }
+
+  @keyframes terminal-appear {
+    from {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes blink {
+    from,
+    to {
+      color: transparent;
+    }
+    50% {
+      color: inherit;
+    }
+  }
+
+  @keyframes bob {
+    from {
+      transform: translateY(0);
+    }
+    to {
+      transform: translateY(-4px);
+    }
+  }
+}
+
 :root {
   --bg: #f4f4f0;
   --ink: #101010;
@@ -21,46 +142,39 @@
   --line: #f7f6ef;
 }
 
-* {
-  box-sizing: border-box;
-}
+@layer base {
+  html {
+    background: var(--bg);
+  }
 
-html {
-  background: var(--bg);
-}
+  body {
+    margin: 0;
+    min-width: 320px;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-geist), Arial, sans-serif;
+    transition:
+      background 0.2s,
+      color 0.2s;
+    zoom: 0.9;
+    position: relative;
+  }
 
-body {
-  margin: 0;
-  min-width: 320px;
-  background: var(--bg);
-  color: var(--ink);
-  font-family: var(--font-geist), Arial, sans-serif;
-  transition:
-    background 0.2s,
-    color 0.2s;
-  zoom: 0.9;
-  position: relative;
-}
+  button,
+  select,
+  input,
+  textarea {
+    font: inherit;
+  }
 
-button,
-select,
-input,
-textarea {
-  font: inherit;
-}
+  button {
+    cursor: pointer;
+  }
 
-button {
-  cursor: pointer;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-::selection {
-  color: #111;
-  background: var(--yellow);
+  ::selection {
+    color: #111;
+    background: var(--yellow);
+  }
 }
 
 .site-header {
@@ -2215,6 +2329,8 @@ body.error-body-bg {
   font-weight: 400;
   letter-spacing: 0.08em;
   line-height: 1.13;
+  width: fit-content;
+  max-width: calc(100% / 1.12);
   transform: scaleX(1.12);
   transform-origin: left;
 }
