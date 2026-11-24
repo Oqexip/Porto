@@ -2,6 +2,16 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Activity, BarChart3, Eye, Users } from "lucide-react";
 import Header from "@/components/Header";
+import {
+  pageHeading,
+  pageHeadingText,
+  pageShell,
+  pixelHeading,
+  pixelHeadingBox,
+  pixelHeadingIcon,
+  pixelHeadingMy,
+  statusStrip,
+} from "@/components/pageStyles";
 import { getTrafficReport, type TrafficDay } from "@/lib/vercelAnalytics";
 
 export const metadata: Metadata = {
@@ -135,23 +145,19 @@ export default async function AnalyticsPage({
   return (
     <>
       <Header back />
-      <main
-        className="page-shell sub-page page-enter"
-        style={{ fontFamily: "var(--font-geist-mono)" }}
-      >
-        <section className="page-heading">
-          <h1 className="pixel-heading">
-            <BarChart3 className="pixel-heading-icon" size={68} strokeWidth={2.5} aria-hidden="true" />
-            <span className="pixel-heading-my">SITE</span>
-            <span
-              className="pixel-heading-box"
-              style={{ fontSize: "clamp(1.4rem, 4.6vw, 3.6rem)" }}
-            >
+      <main className={`${pageShell} font-mono`}>
+        <section className={pageHeading}>
+          <h1 className={pixelHeading}>
+            <BarChart3 className={pixelHeadingIcon} size={68} strokeWidth={2.5} aria-hidden="true" />
+            <span className={pixelHeadingMy}>SITE</span>
+            <span className={pixelHeadingBox.replace("text-[clamp(2rem,5vw,3.6rem)]", "text-[clamp(1.4rem,4.6vw,3.6rem)]")}>
               ANALYTICS
             </span>
           </h1>
-          <p>Real visitors, real page views. A small window into how this corner of the internet is doing.</p>
-          <div className="status-strip">SOURCE: VERCEL WEB ANALYTICS / REFRESHES ABOUT EVERY 5 MINUTES</div>
+          <p className={pageHeadingText}>
+            Real visitors, real page views. A small window into how this corner of the internet is doing.
+          </p>
+          <div className={statusStrip}>SOURCE: VERCEL WEB ANALYTICS / REFRESHES ABOUT EVERY 5 MINUTES</div>
         </section>
 
         {result.status !== "ready" ? (
@@ -227,7 +233,7 @@ export default async function AnalyticsPage({
                     {result.report.topPages.map((page, index) => (
                       <li key={`${page.path}-${index}`} className="border-t-2 border-[var(--line)] pt-3">
                         <div className="flex items-start justify-between gap-3">
-                          <span className="min-w-0 text-sm font-black" style={{ overflowWrap: "anywhere" }}>
+                          <span className="min-w-0 text-sm font-black [overflow-wrap:anywhere]">
                             <span className="mr-2 text-[var(--muted)]">{String(index + 1).padStart(2, "0")}</span>
                             {page.path}
                           </span>

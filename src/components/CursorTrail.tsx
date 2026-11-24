@@ -77,10 +77,14 @@ export default function CursorTrail() {
   }, []);
 
   return (
-    <div className="cursor-trail" aria-hidden="true">
+    <div
+      className="pointer-events-none absolute inset-0 z-100 overflow-hidden max-narrow:hidden"
+      aria-hidden="true"
+    >
       {dots.map((dot, index) => (
         <i
           key={dot.id}
+          className="absolute size-[15px] animate-trail-fade border-2 border-[#111] shadow-[2px_2px_0_#111] [transform:translate(-50%,-50%)_rotate(14deg)]"
           style={{
             left: dot.x,
             top: dot.y,
